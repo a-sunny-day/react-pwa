@@ -59,7 +59,7 @@ class JoinMeetingForm extends React.Component {
             console.log("meeting id is %s", meetingId);
             console.log("join name is %s", this.state.joinName);
             console.groupEnd();
-            this.props.joinMeeting();
+            this.props.joinMeeting(meetingId, this.state.joinName);
         }
     }
 
@@ -125,8 +125,8 @@ class JoinMeetingForm extends React.Component {
 function mapDispatchToProps(dispatch) {
     return {
         onCancel: () => dispatch( changeView(VIEWS.MAIN_LOGOUT) ),
-        joinMeeting: () => {
-            window.open("http://www.zoom.us/wc/2156759460/join", "_blank", "width=400,height=400,top=400,left=400,location=0")
+        joinMeeting: (meetingId, joinName) => {
+            window.open(`https://www.zoom.us/wc/${meetingId}/join`, "_blank", "top=20,left=20,location=0")
         }
     }
 }

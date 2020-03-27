@@ -14,9 +14,15 @@ import {
 import { connect } from 'react-redux';
 
 function MainLogout(props) {
-
     return (
         <div className="main">
+            {
+                props.userInfo && props.userInfo.token ?
+                <div className="header">
+                    {props.userInfo.userName}
+                </div> 
+                : null
+            }
             <div className="main--logo">
                 <img src={ZoomLogo} alt="zoom video"/>
             </div>
@@ -36,7 +42,11 @@ function MainLogout(props) {
 }
 
 export default connect(
-    null,
+    state => {
+        return {
+            userInfo: state.userInfo
+        }
+    },
     dispatch => {
         return {
             goToJoinMeeting: () => dispatch( changeView(VIEWS.JOIN_MEETING) ),

@@ -1,10 +1,11 @@
 import * as actions from './actions'
 
 let initState =  {
-    currentView: actions.VIEWS.LOGIN,
+    currentView: actions.VIEWS.LOGOUT,
     isLogging: false,
     userInfo: {
-        token: null
+        token: null,
+        userName: ""
     }
 };
 
@@ -20,6 +21,14 @@ export function appState(state = initState, action) {
             return {
                 ...state,
                 isLogging: action.status
+            }
+        case actions.SET_USERINFO:
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    ...action.userInfo
+                }
             }
         default:
             return state;

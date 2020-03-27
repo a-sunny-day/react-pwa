@@ -8,6 +8,7 @@ export const VIEWS = {
 
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const IS_LOGGING = 'IS_LOGGING';
+export const SET_USERINFO = 'SET_USERINFO';
 
 /****************** action creators */
 export function changeView(view) {
@@ -21,6 +22,13 @@ export function setIsLogining(status) {
     return {
         type: IS_LOGGING,
         status: status
+    }
+}
+
+export function setUserInfo(info) {
+    return {
+        type: SET_USERINFO,
+        userInfo: info
     }
 }
 
@@ -38,6 +46,7 @@ export function login(email, password) {
                     console.log('email: ', email);
                     console.log('password: ', password);
                     console.groupEnd();
+                    dispatch( setUserInfo({token: "token", userName: "This is my name"}) );
                     return response.json();
                 },
                 error => {
