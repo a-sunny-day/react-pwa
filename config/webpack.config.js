@@ -301,6 +301,8 @@ module.exports = function(webpackEnv) {
         styles: `${paths.appSrc}/assets/styles`,
         images: `${paths.appSrc}/assets/images`,
         components: `${paths.appSrc}/components`,
+        store: `${paths.appSrc}/store`,
+        utils: `${paths.appSrc}/utils`
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

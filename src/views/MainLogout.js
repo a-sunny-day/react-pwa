@@ -7,7 +7,13 @@
 
 import React from 'react'
 import ZoomLogo from 'images/logo@2x.png';
-export default function(props) {
+import {
+    changeView,
+    VIEWS,
+} from 'store/actions'
+import { connect } from 'react-redux';
+
+function MainLogout(props) {
 
     return (
         <div className="main">
@@ -28,3 +34,13 @@ export default function(props) {
         </div>
     )
 }
+
+export default connect(
+    null,
+    dispatch => {
+        return {
+            goToJoinMeeting: () => dispatch( changeView(VIEWS.JOIN_MEETING) ),
+            goToSignIn: () => dispatch( changeView(VIEWS.LOGIN))
+        }
+    }
+)(MainLogout);

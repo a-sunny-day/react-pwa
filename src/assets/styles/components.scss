@@ -1,0 +1,45 @@
+.zm-checkbox-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    .check-mark {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 16px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        // background-color: #eee;
+        border: 1px solid gray;
+        border-radius: 30%;
+
+        &::after {
+            display: none;
+            content: '';
+            width: 3px;
+            height: 8px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+.zm-checkbox-container input:checked ~ .check-mark {
+    background: #1872e0;
+    &:after {
+        display: block;
+    }
+}

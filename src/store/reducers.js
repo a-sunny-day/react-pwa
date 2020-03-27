@@ -1,18 +1,16 @@
-/*********************      Actions     */
-const UPDATAE_COUNTER =  'UPDATAE_COUNTER';
-
+import * as actions from './actions'
 
 let initState =  {
-    counter: 0
+    currentView: actions.VIEWS.JOIN_MEETING 
 };
 
 
 export function appState(state = initState, action) {
     switch (action.type) {
-        case UPDATAE_COUNTER:
+        case actions.CHANGE_VIEW:
             return {
                 ...state,
-                counter: state.counter++
+                currentView: action.view
             };
         default:
             return state;
