@@ -25,3 +25,23 @@ export function addHyphenToMeetingId(input) {
 export function isEmail(value) {
     return /[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}/.test(value);
 }
+
+
+
+export function encodeURL(dataObject) {
+    // value is not an object 
+    let result = [];
+    for(let key in dataObject) {
+        result.push(key + "=" + dataObject[key]);
+    }
+    return window.encodeURI( result.join("&") );
+}
+
+export function getDomain(url) {
+    var result;
+    var urlExec = /https:\/\/([^\/]+)/ig.exec(url);
+    if (urlExec && urlExec.length) {
+        result = urlExec[0];
+    }
+    return result;
+}

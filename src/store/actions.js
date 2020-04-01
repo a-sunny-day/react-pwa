@@ -1,3 +1,7 @@
+import {
+    login_api,
+    test_reddit_api
+} from "services/apis.js";
 
 export const VIEWS = {
     MAIN_LOGIN: 'MAIN_LOGIN',
@@ -37,24 +41,27 @@ export function setUserInfo(info) {
 export function login(email, password) {
     return dispatch => {
         dispatch( setIsLogining(true) );
-        return fetch('https://www.reddit.com/r/cpp.json')
-            .then(
-                response => {
-                    dispatch(setIsLogining(false));
-                    dispatch( changeView(VIEWS.MAIN_LOGIN) );
-                    console.group('login')
-                    console.log('email: ', email);
-                    console.log('password: ', password);
-                    console.groupEnd();
-                    dispatch( setUserInfo({token: "token", userName: "This is my name"}) );
-                    return response.json();
-                },
-                error => {
-                    dispatch(setIsLogining(false));
-                    console.log(error);
-                })
-            .then(json => {
-                return json.data.dist;
-            })
+        // return fetch('cpp.json')
+        return login_api()
+            // .then(
+            //     response => {
+            //         dispatch(setIsLogining(false));
+            //         dispatch( changeView(VIEWS.MAIN_LOGIN) );
+            //         console.group('login')
+            //         console.log('email: ', email);
+            //         console.log('password: ', password);
+            //         console.groupEnd();
+            //         dispatch( setUserInfo({token: "token", userName: "This is my name"}) );
+            //         console.log(response);
+            //         return response.json();
+            //     },
+            //     error => {
+            //         dispatch(setIsLogining(false));
+            //         console.log(error);
+            //     })
+            // .then(json => {
+            //     console.log(json);
+            //     return json && json.data && json.data.dist;
+            // })
     }
 }
