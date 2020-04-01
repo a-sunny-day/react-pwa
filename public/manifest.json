@@ -1,20 +1,30 @@
 {
   "short_name": "WebClient",
   "name": "WebClient PWA",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo-128.png",
-      "type": "image/png",
-      "sizes": "128x128"
-    }
-  ],
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "icons": [
+    {
+        "src": "logo-36.png",
+        "type": "image/png",
+        "sizes": "36x36"
+      },
+      {
+        "src": "logo-72.png",
+        "type": "image/png",
+        "sizes": "72x72"
+      },
+      {
+        "src": "logo-128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      },
+    {
+      "src": "logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
 }
