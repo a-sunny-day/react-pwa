@@ -6,7 +6,7 @@ import JoinMeeting from "./JoinMeeting";
 import MainLogout from './MainLogout';
 import MainLogin from './MainLogin';
 import Login from './Login'
-
+import LoginIframe from './LoginIframe';
 import {
     VIEWS,
 } from 'store/actions'
@@ -22,7 +22,7 @@ function App(props) {
             CurrentView = JoinMeeting;
             break;
         case VIEWS.LOGIN:
-            CurrentView = Login;
+            CurrentView = LoginIframe;
             break;
         case VIEWS.MAIN_LOGOUT:
         default:

@@ -1,5 +1,10 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
+let count = 0;
 module.exports = function (app) {
+    app.use("*", (req, res, next) => {
+        console.log(`${count++} ${req.method.toUpperCase()} ${req.protocol}://${req.hostname}${req.originalUrl}`);
+        next();
+    })
     app.use(
         '/api',
         createProxyMiddleware({
@@ -9,8 +14,8 @@ module.exports = function (app) {
                 '^/api': ''
             },
             onProxyReq: function(req) {
-                console.log('url', req.path)
-                console.log('body', req.body)
+                // console.log('url', req.path)
+                // console.log('body', req.body)
             }
         })
     );
@@ -20,8 +25,8 @@ module.exports = function (app) {
             target: 'https://devb.zoomdev.us',
             changeOrigin: true,
             onProxyReq: function(req) {
-                console.log('url', req.path)
-                console.log('body', req.body)
+                // console.log('url', req.path)
+                // console.log('body', req.body)
             }
         })
     );

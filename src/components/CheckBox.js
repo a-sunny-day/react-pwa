@@ -1,5 +1,5 @@
 import React from 'react';
-import "styles/components.scss";
+import "./components.scss";
 import classnames from 'classnames';
 
 class CheckBox extends React.Component {
