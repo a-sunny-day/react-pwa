@@ -9,13 +9,31 @@ const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
+console.log("++++++++++++++++++++++++++++++++++++++++++++")
+/**
+* Every program that runs on your computer has a current working directory, 
+* or cwd. Any filenames or paths that do not begin with the root folder are assumed to be under the current working directory
+* current working directory is for the process; 
+* cwd is initially set to the path where you launch nodejs to run a script
+* and is set by calling process.chdir('other-path')
+*/
+console.log(`\t ${process.cwd()}`);
+
+// __dirname is for any files
+// the directory name of the directory containing the current file
+console.log(`\t ${__dirname}`);
+console.log("++++++++++++++++++++++++++++++++++++++++++++")
+// process.exit(-1)
+
+
+
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
 // webpack needs to know it to put the right <script> hrefs into HTML even in
 // single-page apps that may serve index.html for nested URLs like /todos/42.
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-const publicUrlOrPath = getPublicUrlOrPath(
+const publicUrlOrPath = process.env.NODE_ENV === 'development' && "/fake/" || getPublicUrlOrPath(
   process.env.NODE_ENV === 'development',
   require(resolveApp('package.json')).homepage,
   process.env.PUBLIC_URL
