@@ -7,6 +7,8 @@ import MainLogout from './MainLogout';
 import MainLogin from './MainLogin';
 import Login from './Login'
 import LoginIframe from './LoginIframe';
+import PWAInstallPopup from "components/PWAInstallPopup/PWAInstallPopup.js"
+import { isInStandaloneMode } from "utils/index.js"
 import {
     VIEWS,
 } from 'store/actions'
@@ -30,8 +32,11 @@ function App(props) {
     }
 
     return (
-        <div className="App">
+        <div className="app">
             <CurrentView />
+            {
+                !isInStandaloneMode() && <PWAInstallPopup />
+            }
         </div>
     );
 }

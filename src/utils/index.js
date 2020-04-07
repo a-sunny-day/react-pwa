@@ -45,3 +45,8 @@ export function getDomain(url) {
     }
     return result;
 }
+
+
+export function isInStandaloneMode() {
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
