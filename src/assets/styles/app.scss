@@ -37,7 +37,9 @@
 .main--logo {
     width: 200px;
     height: 75px;
-    margin-top: 60px;
+    margin-top: 20px;
+    background: url("../images/logo@2x.png") no-repeat;
+    background-size: contain;
 }
 
 .main--btn {

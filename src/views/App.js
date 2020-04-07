@@ -32,12 +32,15 @@ function App(props) {
     }
 
     return (
-        <div className="app">
-            <CurrentView />
+        <>
+            <div className="app">
+                <CurrentView />
+            </div>
             {
                 !isInStandaloneMode() && <PWAInstallPopup />
             }
-        </div>
+        </>
+        
     );
 }
 

@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import ZoomLogo from 'images/logo@2x.png';
+// import ZoomLogo from 'images/logo@2x.png';
 import {
     changeView,
     VIEWS,
@@ -23,9 +23,7 @@ function MainLogout(props) {
                 </div> 
                 : null
             }
-            <div className="main--logo">
-                <img src={ZoomLogo} alt="zoom video"/>
-            </div>
+            <div className="main--logo"> </div>
             <div className="main--btns">
                <button 
                    className="main--btn main--btn-join" 
