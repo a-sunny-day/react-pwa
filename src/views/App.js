@@ -1,46 +1,45 @@
 import React from 'react';
 import 'styles/app.scss';
 import {connect} from 'react-redux';
-// import MainLogout from "./MainLogout";
+import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
 import JoinMeeting from "./JoinMeeting";
-import MainLogout from './MainLogout';
-import MainLogin from './MainLogin';
-import Login from './Login'
+import Home from './Home';
+import Signin from './Signin'
+import StartMeeting from './StartMeeting'
 import LoginIframe from './LoginIframe';
 import PWAInstallPopup from "components/PWAInstallPopup/PWAInstallPopup.js"
 import { isInStandaloneMode } from "utils/index.js"
-import {
-    VIEWS,
-} from 'store/actions'
+
 
 function App(props) {
     console.log(props)
-    let CurrentView = null;
-    switch(props.currentView) {
-        case VIEWS.MAIN_LOGIN:  
-            CurrentView = MainLogin;
-            break;
-        case VIEWS.JOIN_MEETING:
-            CurrentView = JoinMeeting;
-            break;
-        case VIEWS.LOGIN:
-            CurrentView = LoginIframe;
-            break;
-        case VIEWS.MAIN_LOGOUT:
-        default:
-            CurrentView = MainLogout;
-    }
 
     return (
         <>
             <div className="app">
-                <CurrentView />
+                <Switch>
+                    <Route path="/signin" >
+                        <Signin />
+                    </Route>
+
+                    <Route path="/join">
+                        <JoinMeeting />
+                    </Route>
+
+                    <Route path="/start">
+                        <StartMeeting />
+                    </Route>
+
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
             </div>
             {
                 !isInStandaloneMode() && <PWAInstallPopup />
             }
         </>
-        
     );
 }
 

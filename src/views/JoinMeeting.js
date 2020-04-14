@@ -1,10 +1,8 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import ZmCheckbox from "components/CheckBox";
 import {connect} from 'react-redux';
-import {
-    changeView,
-    VIEWS,
-} from 'store/actions'
+
 import {addHyphenToMeetingId} from 'utils/index';
 
 class JoinMeetingForm extends React.Component {
@@ -72,66 +70,62 @@ class JoinMeetingForm extends React.Component {
     render() {
         return (
             <div className="join">
-                <h2 className="join__header">Join Meeting</h2>
-                <div className="join__form">
-                    <input 
+                <h2 className="join-header">Join Meeting</h2>
+                <div className="join-form">
+                    <input
                         type="text" 
-                        className="join__meetingId" 
+                        className="join-meetingId" 
                         placeholder="Meeting ID"
                         value={this.state.meetingId}
                         onChange={this.onMeetingIdChange}
                         onKeyDown={this.onInputKeyDown}></input>
-                    <input 
+                    <input
                         type="text" 
-                        className="join__joinName" 
+                        className="join-joinName" 
                         placeholder="Screen Name"
                         value={this.state.joinName}
                         onChange={this.onJoinNameChange}
                         onKeyDown={this.onInputKeyDown}></input>
 
                     <ZmCheckbox 
-                        containerClass="join__connect-audio" 
+                        containerClass="join-connect-audio" 
                         text="Remember my name for future meetings"
                         checked={false} 
                         onChange={checked => {console.log(checked)}}/>
                     <ZmCheckbox 
-                        containerClass="join__connect-audio" 
+                        containerClass="join-connect-audio" 
                         text="Do not connect to audio"
                         checked={false} 
                         onChange={checked => {console.log(checked)}}/>
                     <ZmCheckbox 
-                        containerClass="join__off-video"
+                        containerClass="join-off-video"
                         text="Turn off my video" 
                         checked={false} 
                         onChange={checked => {console.log(checked)}}/>
 
                 </div>
                 <footer>
-                    <button 
+                    <button
                         disabled={!(this.state.isMeetingIdValid && this.state.isJoinNameValid)} 
-                        className="join-btn"
+                        className="btn-join"
                         onClick={this.onClickJoinMeeting}>Join</button>
-                    <button className="cancel-btn" onClick={this.props.onCancel}>Cancel</button>
+                    <button className="btn-cancel" onClick={this.props.onCancel}>Cancel</button>
                 </footer>
             </div>
         )
     }
 }
 
-// mainlogout -> join meeting
-// mainlogin -> join meeing  
-// we return back we must make sure where we come from
-// is it a reason for us to introduce a router???
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
     return {
-        onCancel: () => dispatch( changeView(VIEWS.MAIN_LOGOUT) ),
+        onCancel: () => {
+            const {history} = ownProps;
+            history.goBack();
+        },
         joinMeeting: (meetingId, joinName) => {
-            window.open(`https://www.zoom.us/wc/${meetingId}/join`, "_blank", "top=20,left=20,location=0")
+            window.open(`https://www.zoom.us/wc/${meetingId}/join`, "_blank", "top=20,left=20,location=0");
         }
     }
 }
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(JoinMeetingForm);
+export default withRouter( connect( null, mapDispatchToProps)(JoinMeetingForm) );

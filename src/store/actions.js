@@ -14,14 +14,6 @@ export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const IS_LOGGING = 'IS_LOGGING';
 export const SET_USERINFO = 'SET_USERINFO';
 
-/****************** action creators */
-export function changeView(view) {
-    return {
-        type: CHANGE_VIEW,
-        view: view
-    }
-}
-
 export function setIsLogining(status) {
     return {
         type: IS_LOGGING,

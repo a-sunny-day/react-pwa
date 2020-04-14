@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store/index.js';
 import {Provider} from 'react-redux';
+import {HashRouter as Router} from "react-router-dom"
 import 'styles/index.scss';
 import App from './views/App';
 import * as serviceWorker from './serviceWorker';
@@ -13,11 +14,13 @@ if(window.matchMedia("(display-mode: standalone)").matches || window.navigator.s
 }
 
 ReactDOM.render(
-    <Provider store={store}>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    </Provider> ,
+    <Router>
+        <Provider store={store}>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </Provider>
+    </Router> ,
   document.getElementById('root')
 );
 

@@ -1,8 +1,7 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import ZmCheckbox from 'components/CheckBox';
 import {
-    VIEWS,
-    changeView,
     login,
 } from 'store/actions'
 import { isEmail } from "utils/index";
@@ -51,61 +50,65 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <div className="login">
-                <h2 className="login__header">Sign In</h2>
-                <input 
-                    className="login__email" 
+            <div className="signin">
+                <h2 className="signin-header">Sign In</h2>
+                <input
+                    className="signin-email" 
                     type="text" 
                     placeholder="Your Email"
                     onChange={this.onEmailChange}
                     onKeyDown={this.onInputKeyDown}></input>
-                <input 
-                    className="login__password" 
+                <input
+                    className="signin-password" 
                     type="password" 
                     placeholder="Your Password"
                     onChange={this.onPassordChange}
                     onKeyDown={this.onInputKeyDown}></input>
-                <div className="login__btns">
+                <div className="btns-signin">
                     <ZmCheckbox 
                         text="Keep me signed in"
                         checked={true} 
                         onChange={(e) => {console.log(e.target)}} />
-                    <button 
-                        className="login__signin" 
+                    <button
+                        className="signin-signin" 
                         style={{
                             color: this.props.isLogging ? "red" : ''
                         }}
                         onClick={this.onClickLogin}
                         disabled={!(this.state.isEmailValid && this.state.isPasswordValid)}> Sign In</button>
                 </div>
-                <p className="login__confirmation">
+                <p className="signin-confirmation">
                     By signing in, I agree to the 
                     <a href={privacyURL} target="_blank" rel="noopener noreferrer">Privacy Polcy</a>
                     &nbsp;and&nbsp;
                     <a href={serviceURL} target="_blank" rel="noopener noreferrer">Terms of Service</a>
                 </p>
-                <footer className="login__footer">
-                    <span className="login__back" onClick={this.props.back}>&lt;&nbsp;Back</span>
-                    <a href={signupURL} className="login__signup" target="_blank" rel="noopener noreferrer">Sign Up Free</a>
+                <footer className="signin-footer">
+                    <span className="signin-back" onClick={this.props.back}>&lt;&nbsp;Back</span>
+                    <a href={signupURL} className="signin-signup" target="_blank" rel="noopener noreferrer">Sign Up Free</a>
                 </footer>
             </div>
         )
     }
 }
 
-export default connect(
-    state => ({
-        isLogging: state.isLogging
-    }),
-    dispatch => {
-        return {
-            back: () => dispatch( changeView(VIEWS.MAIN_LOGOUT) ),
-            login: (email, password) => {
-                dispatch( login(email, password) )
-                    .then(data => {
-                        console.log('login returned: ', data);
-                    })
-            }
-        }
+const mapState = state => ({
+    isLogging: state.isLogging
+});
+
+const mapDispatch = (dispatch, ownProps) => ({
+    back: () => {
+        const { history } = ownProps;
+        history.goBack();
+    },
+    login: (email, password) => {
+        const {history} = ownProps;
+        dispatch( login(email, password) )
+            .then(data => {
+                history.replace({
+                    pathname: '/'
+                });
+            })
     }
-)(Login);
+})
+export default withRouter(connect( mapState, mapDispatch )(Login) );
