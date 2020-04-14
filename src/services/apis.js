@@ -1,5 +1,5 @@
 import {post, get} from "./http"
-import {encodeURL, getDomain } from "utils/index.js";
+import {encodeURL} from "utils/index.js";
 const dev_url_prefix = "/api";
 // const dev_url_prefix = "/test";
 
@@ -16,19 +16,11 @@ function login() {
         "Accept": "application/json, text/javascript, */*; q=0.01",
         "X-Requested-With": "XMLHttpRequest",
     }
-    /*
-    let headers = {
-        "Content-Type": "application/json",
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-Requested-From': 'ZOOM-EXTENSION',
-    };
-    return post(url, headers, JSON.stringify(body))
-    */
     return post(url, headers, encodeURL(body));
 }
 
 function getUserInfo(login_result_url) {
-    let domain = getDomain(login_result_url);
+    // let domain = getDomain(login_result_url);
     let api = "/mimo/login";
     let url = api;
     let headers = {

@@ -1,6 +1,5 @@
 import {
     login_api,
-    test_reddit_api
 } from "services/apis.js";
 
 export const VIEWS = {

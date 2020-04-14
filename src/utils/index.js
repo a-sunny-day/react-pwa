@@ -39,7 +39,7 @@ export function encodeURL(dataObject) {
 
 export function getDomain(url) {
     var result;
-    var urlExec = /https:\/\/([^\/]+)/ig.exec(url);
+    var urlExec = /https:\/\/([^/]+)/ig.exec(url);
     if (urlExec && urlExec.length) {
         result = urlExec[0];
     }

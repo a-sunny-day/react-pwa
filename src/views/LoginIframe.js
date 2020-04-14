@@ -12,6 +12,7 @@ export default class LoginIframe extends React.Component {
     render() {
         return (
             <iframe 
+                title="siginin"
                 ref={this.frameRef}
                 name="login-iframe"
                 className="login-iframe"

@@ -1,13 +1,13 @@
 import React from 'react';
 import 'styles/app.scss';
 import {connect} from 'react-redux';
-import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import JoinMeeting from "./JoinMeeting";
 import Home from './Home';
 import Signin from './Signin'
 import StartMeeting from './StartMeeting'
-import LoginIframe from './LoginIframe';
+// import LoginIframe from './LoginIframe';
 import PWAInstallPopup from "components/PWAInstallPopup/PWAInstallPopup.js"
 import { isInStandaloneMode } from "utils/index.js"
 
