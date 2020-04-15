@@ -22,26 +22,26 @@ function MainLogout(props) {
             <div className="home-logo"></div>
 
 
-            <div className="btns">
+            <div className="btns-home">
 
                { 
                     props.userInfo.valid && (
                         <button 
-                            className="btn btn-start"
+                            className="btn btn-block btn-home-start"
                             onClick={props.goToStartMeeting}
                             >Start Meeting</button>
                     )
                }
 
                <button 
-                   className="btn btn-join"
+                   className="btn btn-block btn-home-join"
                    onClick={props.goToJoinMeeting}
                    >Join Meeting</button>
 
                {
                    !props.userInfo.valid && (
                     <button 
-                        className="btn btn-signin"
+                        className="btn btn-block btn-hone-signin"
                         onClick={props.goToSignIn}
                         >Sign In</button>
                    )

@@ -6,7 +6,7 @@ class CheckBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: "2156759460",
+            text: "",
             checked: true,
         }
         this.onChange = this.onChange.bind(this);
