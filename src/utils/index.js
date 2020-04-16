@@ -6,8 +6,9 @@ export function addHyphenToMeetingId(input) {
     input += "";
     input = input.replace(/-/g, "").split('');
     let length = input.length;
-
-    if(length > 3 && length <= 6) {
+    if(length <= 3) {
+        input = input;
+    } else if(length <= 6) {
         input.splice(3, 0, "-");
     } else if(length <= 10) {
         input.splice(3, 0, '-');

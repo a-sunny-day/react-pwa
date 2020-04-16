@@ -1,8 +1,8 @@
 import React from 'react';
-import "./components.scss";
+import "./Checkbox.scss";
 import classnames from 'classnames';
 
-class CheckBox extends React.Component {
+class Checkbox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,4 +29,4 @@ class CheckBox extends React.Component {
     }
 }
 
-export default CheckBox;
+export default Checkbox;
