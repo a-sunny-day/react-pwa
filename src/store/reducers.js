@@ -1,12 +1,15 @@
 import * as actions from './actions'
 
 let initState =  {
-    isLogging: false,
+    isLogging: false, // 
+    isDuringMeeting: false,
     userInfo: {
-        valid: true,
+        valid: false,
         token: null,
-        userName: ""
-    }
+        userName: "",
+    },
+    lastJoinName: "",
+    meetingHistoryList: []
 };
 
 
@@ -24,6 +27,11 @@ export function appState(state = initState, action) {
                     ...state.userInfo,
                     ...action.userInfo
                 }
+            }
+        case actions.IS_DURING_MEETING:
+            return {
+                ...state,
+                isDuringMeeting: action.flag
             }
         default:
             return state;

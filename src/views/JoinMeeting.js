@@ -1,8 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import ZmCheckbox from "components/CheckBox";
+import ZmCheckbox from "components/Checkbox/Checkbox";
 import {connect} from 'react-redux';
-
+import MeetingAgent from "utils/MeetingAgent.js";
 import {addHyphenToMeetingId} from 'utils/index';
 
 class JoinMeetingForm extends React.Component {
@@ -19,9 +19,7 @@ class JoinMeetingForm extends React.Component {
         this.onClickJoinMeeting = this.onClickJoinMeeting.bind(this);
         this.onInputKeyDown  = this.onInputKeyDown.bind(this);
     }
-    onMeetingIdChange(e) {
-        console.log(e.target.value);
-        
+    onMeetingIdChange(e) {        
         let id = e.target.value.toLowerCase();
         id = id.replace(/[-\s]/g, "");
         // if(/^[a-z]/.test(id)) {
@@ -120,10 +118,14 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         onCancel: () => {
             const {history} = ownProps;
-            history.goBack();
+            if(history.length === 1) {
+                history.push({pathname: "/"})
+            } else {
+                history.goBack();
+            }
         },
         joinMeeting: (meetingId, joinName) => {
-            window.open(`https://www.zoom.us/wc/${meetingId}/join`, "_blank", "top=20,left=20,location=0");
+            MeetingAgent.getInstance().joinMeeting({meetingId, joinName});
         }
     }
 }

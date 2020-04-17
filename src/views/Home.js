@@ -41,7 +41,7 @@ function MainLogout(props) {
                {
                    !props.userInfo.valid && (
                     <button 
-                        className="btn btn-block btn-hone-signin"
+                        className="btn btn-block btn-home-signin"
                         onClick={props.goToSignIn}
                         >Sign In</button>
                    )

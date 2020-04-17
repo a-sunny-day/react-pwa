@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import ZmCheckbox from 'components/CheckBox';
+import ZmCheckbox from 'components/Checkbox/Checkbox';
 
 function StartMeeting(props) {
     let pmi = "***-****-****";
@@ -26,7 +26,7 @@ function StartMeeting(props) {
             </div>
 
             <div className="start-footer">
-                <a href="#" className="start-cancel" onClick={props.goBack}>Cancel</a>
+                <span href="#" className="start-cancel" onClick={props.goBack}>Cancel</span>
             </div>
         </div>
     )
@@ -35,7 +35,11 @@ function StartMeeting(props) {
 const mapDispatch = (dispatch, ownProps) => ({
     goBack() {
         let {history} = ownProps;
-        history.goBack();
+        if(history.length === 1) {
+            history.push({pathname: "/"});
+        } else {
+            history.goBack();
+        }
     }
 })
 export default withRouter( connect(null, mapDispatch)(StartMeeting) );
