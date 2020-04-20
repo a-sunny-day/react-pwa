@@ -1,7 +1,6 @@
 import * as actions from './actions'
 
 let initState =  {
-    isLogging: false, // 
     isDuringMeeting: false,
     userInfo: {
         valid: false,
@@ -15,11 +14,6 @@ let initState =  {
 
 export function appState(state = initState, action) {
     switch (action.type) {
-        case actions.IS_LOGGING:
-            return {
-                ...state,
-                isLogging: action.status
-            }
         case actions.SET_USERINFO:
             return {
                 ...state,
