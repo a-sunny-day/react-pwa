@@ -303,7 +303,8 @@ module.exports = function(webpackEnv) {
         components: `${paths.appSrc}/components`,
         store: `${paths.appSrc}/store`,
         utils: `${paths.appSrc}/utils`,
-        services: `${paths.appSrc}/services`
+        services: `${paths.appSrc}/services`,
+        routes: `${paths.appSrc}/routes`,
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

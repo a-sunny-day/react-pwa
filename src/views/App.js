@@ -2,7 +2,7 @@ import React from 'react';
 import 'styles/app.scss';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
-
+import AuthRoute from "routes/AuthRoute.js"
 import JoinMeeting from "./JoinMeeting";
 import Home from './Home';
 import Signin from './Signin'
@@ -27,9 +27,9 @@ function App(props) {
                         <JoinMeeting />
                     </Route>
 
-                    <Route path="/start">
+                    <AuthRoute path="/start">
                         <StartMeeting />
-                    </Route>
+                    </AuthRoute>
 
                     <Route path="/">
                         <Home />
