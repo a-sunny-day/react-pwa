@@ -6,14 +6,15 @@ import React from "react";
 export default function Father (props) {
     React.Children.forEach(props.children, (childElement) => {
         console.log(childElement);
-    })
+    });
 
     let content = "";
-    let arg = "long time no see";
+    let arg = "injected by father";
     if("function" === typeof props.children)
         content = props.children(arg);
     else 
-        content = props.children
+        content = props.children;
+
     return (
         <div>
             {content}

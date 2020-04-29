@@ -1,11 +1,12 @@
 import React from "react";
 import StateChild from 'components/StatefulChild.js';
+import StatelessChild from 'components/StatelessChild.js'
 
 export default class StatePureFathe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter: 0
+            counter: 0,
         }
     }
 
@@ -17,15 +18,18 @@ export default class StatePureFathe extends React.Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
-            this.setState({counter: this.state.counter + 1});
-        }, 1000);
+        // setInterval(() => {
+        //     this.setState({counter: this.state.counter + 1}, function() {
+        //         console.log("state of father: ", this.state)
+        //     });
+        // }, 1000);
     }
    
     render() {
         return (<div>
-            <div>state pure father's props: {this.props.index}</div>
-           <StateChild counter={this.state.counter}/>
+            <div>state pure father's counter: {this.state.counter}</div>
+            <StateChild counter={this.state.counter}/>
+            <StatelessChild />
         </div>)
     }
 }

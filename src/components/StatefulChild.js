@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {userContext} from 'react';
 
 export default class StatefulChild extends React.Component {
     constructor(props) {
