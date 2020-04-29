@@ -10,7 +10,7 @@ import StartMeeting from './StartMeeting'
 // import LoginIframe from './LoginIframe';
 import PWAInstallPopup from "components/PWAInstallPopup/PWAInstallPopup.js"
 import { isInStandaloneMode } from "utils/index.js"
-import Test from 'components/Test.js'
+import Test from './MyTest/Test.js'
 
 function App(props) {
     console.log(props)

@@ -1,8 +1,8 @@
 import React from "react";
-import Father from "components/Father";
-import StatelessChild from "components/StatelessChild.js";
-import StatePureFather from "components/StatePureFather.js";
-import TestSection from "./TestSection/TestSection.js";
+import Father from "./Father";
+import StatelessChild from "./StatelessChild.js";
+import StatePureFather from "./StatePureFather.js";
+import TestSection from "components/TestSection/TestSection.js";
 import {UserInfoContext, ThemeContext} from 'store/Context.js';
 import {produce} from "immer";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import StateChild from 'components/StatefulChild.js';
-import StatelessChild from 'components/StatelessChild.js'
+import StateChild from './StatefulChild.js';
+import StatelessChild from './StatelessChild.js'
 
 export default class StatePureFathe extends React.Component {
     constructor(props) {
