@@ -1,0 +1,26 @@
+.xyz-random-text-section {
+    display: inline-block;
+    min-width: 200px;
+    min-height: 200px;
+    margin: 4px;
+    border: 2px solid #eee;
+    border-radius: 5%;
+    // The default alignment of inline and inline-block elements is baseline
+    vertical-align: top; // or they will not vertically aligned!!!!
+    &:nth-of-type(4n) {
+        border-color: #FFFFCC;
+        background: rgb(193, 196, 196);
+    }
+    &:nth-of-type(4n + 1) {
+        border-color: rgb(155, 133, 250);
+        background: rgb(229, 174, 255);
+    }
+    &:nth-of-type(4n + 2) {
+        border-color: rgb(243, 172, 65);
+        background: rgb(193, 250, 217);
+    }
+    &:nth-of-type(4n + 3) {
+        border-color: rgb(252, 90, 68);
+        background: rgb(253, 171, 202);
+    }
+}
