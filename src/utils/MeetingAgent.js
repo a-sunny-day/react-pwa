@@ -1,4 +1,4 @@
-import {setIsDuringMeeting} from 'store/actions.js';
+import { setIsDuringMeeting } from 'store/actions.js';
 import { isInStandaloneMode } from "utils/index.js";
 import reduxStoreInstance from 'store/index.js';
 
@@ -17,7 +17,7 @@ export default class MeetingAgent {
     }
 
     static getInstance() {
-        if(this.instance) {
+        if (this.instance) {
             return this.instance;
         } else {
             return new MeetingAgent();
@@ -27,23 +27,23 @@ export default class MeetingAgent {
     startMeeting(usePMI) {
         const url = "https://zoomdev.us/wc/2121345852/start";
         let features = isInStandaloneMode() ? this.windowFeatures : "";
-        if(this.openedBrowsingContext == null || this.openedBrowsingContext.closed) {
+        if (this.openedBrowsingContext == null || this.openedBrowsingContext.closed) {
             this.openedBrowsingContext = window.open(url, this.windowName, features);
             this.startListen();
         } else {
             this.openedBrowsingContext.focus();
         }
-        
-        if(this.openedBrowsingContext != null) {
-            reduxStoreInstance.dispatch( setIsDuringMeeting(true) );
+
+        if (this.openedBrowsingContext != null) {
+            reduxStoreInstance.dispatch(setIsDuringMeeting(true));
         }
     }
 
     joinMeeting(meeting) {
         const url = `https://zoomdev.us/wc/${meeting.meetingId}/join?name=${meeting.joinName}`;
         let features = isInStandaloneMode() ? this.windowFeatures : "";
-        if(
-            this.openedBrowsingContext == null || 
+        if (
+            this.openedBrowsingContext == null ||
             this.openedBrowsingContext.closed ||
             !/wc\/\d{8,11}\/(join|start)/.test(this.openedBrowsingContext.location.pathname)
         ) {
@@ -52,14 +52,14 @@ export default class MeetingAgent {
         } else {
             this.openedBrowsingContext.focus();
         }
-        
-        if(this.openedBrowsingContext != null) {
-            reduxStoreInstance.dispatch( setIsDuringMeeting(true) );
+
+        if (this.openedBrowsingContext != null) {
+            reduxStoreInstance.dispatch(setIsDuringMeeting(true));
         }
     }
 
     meetingEnded() {
-        reduxStoreInstance.dispatch( setIsDuringMeeting(false) );
+        reduxStoreInstance.dispatch(setIsDuringMeeting(false));
         this.openedBrowsingContext = null;
     }
 

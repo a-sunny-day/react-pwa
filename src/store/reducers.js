@@ -1,6 +1,7 @@
+import { produce } from 'immer';
 import * as actions from './actions'
 
-let initState =  {
+const initState =  {
     isDuringMeeting: false,
     userInfo: {
         valid: false,
@@ -11,24 +12,15 @@ let initState =  {
     meetingHistoryList: []
 };
 
-
-export function appState(state = initState, action) {
+const rootReducer = produce( (state = initState, action) => {
     switch (action.type) {
         case actions.SET_USERINFO:
-            return {
-                ...state,
-                userInfo: {
-                    ...state.userInfo,
-                    ...action.userInfo
-                }
-            }
+            state.userInfo = action.userInfo;
         case actions.IS_DURING_MEETING:
-            return {
-                ...state,
-                isDuringMeeting: action.flag
-            }
+            state.isDuringMeeting = action.flag;
         default:
             return state;
     }
-}
+});
 
+export default rootReducer;
