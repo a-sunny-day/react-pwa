@@ -3,6 +3,8 @@
     margin: 0 auto;
     padding: 20px;
     margin: auto;
+    min-width: 375px;
+    min-height: 400px;
 }
 
 .btn {
@@ -57,8 +59,8 @@
 
     .btn-home-join {
         min-width: 200px;
-        min-height: 36px;
-        width: 60%;
+        min-height: 46px;
+        width: 80%;
         margin-top: 40px;
         background: #0e72ed;
         color: #fff;
@@ -69,8 +71,8 @@
 
     .btn-home-start {
         min-width: 200px;
-        min-height: 36px;
-        width: 60%;
+        min-height: 46px;
+        width: 80%;
         margin-top: 40px;
         color: #fff;
         background: rgb(255,133,71);
@@ -81,8 +83,8 @@
 
     .btn-home-signin {
         min-width: 200px;
-        min-height: 36px;
-        width: 60%;
+        min-height: 46px;
+        width: 80%;
         margin-top: 40px;
         background: #fff;
         color: #000;

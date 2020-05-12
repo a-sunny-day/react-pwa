@@ -6,14 +6,14 @@ export function addHyphenToMeetingId(input) {
     input += "";
     input = input.replace(/-/g, "").split('');
     let length = input.length;
-    if(length <= 3) {
+    if (length <= 3) {
         input = input;
-    } else if(length <= 6) {
+    } else if (length <= 6) {
         input.splice(3, 0, "-");
-    } else if(length <= 10) {
+    } else if (length <= 10) {
         input.splice(3, 0, '-');
         input.splice(7, 0, '-');
-    } else if(length <= 11) {
+    } else if (length <= 11) {
         input.splice(3, 0, '-');
         input.splice(8, 0, '-');
     }
@@ -32,10 +32,10 @@ export function isEmail(value) {
 export function encodeURL(dataObject) {
     // value is not an object 
     let result = [];
-    for(let key in dataObject) {
+    for (let key in dataObject) {
         result.push(key + "=" + dataObject[key]);
     }
-    return window.encodeURI( result.join("&") );
+    return window.encodeURI(result.join("&"));
 }
 
 export function getDomain(url) {
