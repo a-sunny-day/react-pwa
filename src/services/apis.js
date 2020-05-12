@@ -1,5 +1,5 @@
-import {post, get} from "./http"
-import {encodeURL} from "utils/index.js";
+import { post, get } from "./http"
+import { encodeURL } from "utils/index.js";
 const dev_url_prefix = "/api";
 // const dev_url_prefix = "/test";
 
@@ -41,7 +41,7 @@ export function login_api() {
     return login()
         .then(response => {
             console.log("login api: ", response);
-            if(response.ok) {
+            if (response.ok) {
                 return response.json();
             }
         })
@@ -59,4 +59,49 @@ export function login_api() {
 }
 export function test_reddit_api() {
     return get(`${dev_url_prefix}/cpp.json`);
+}
+
+/**
+ *  service worker cache strategy: cache then network 
+ *  this pattern  requires an callback and call callback twice
+ *  so fetchResource can not return a promise;
+ */
+export function fetchResource(url, callback) {
+    let isNetworkDataReceived = false;
+
+    startSpinner();
+
+    let networkUpdate = fetch(url).then((response) => {
+        return response.json()
+    }).then((data) => {
+        isNetworkDataReceived = true;
+        callback(data);
+    });
+
+    caches.match(url)
+        .then(response => {
+            if(!response) {
+                throw Error('Cache Empty');
+            }
+            return response
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then( data => {
+            if(!isNetworkDataReceived) {
+                callback(data);
+            }
+        })
+        .catch( () => {
+            // cache empty
+            return  networkUpdate
+        })
+        .catch( () => {
+            // catch empty and network error
+            showErrorMessage()
+        })
+        .then(() => {
+            stopSpinner();
+        })
 }

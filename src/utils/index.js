@@ -51,3 +51,24 @@ export function getDomain(url) {
 export function isInStandaloneMode() {
     return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
 }
+
+// take first resolved promise
+export function promiseAny(promises) {
+    return new Promise((resolve, reject) => {
+        // make sure promises are all promises
+        promises = promises.map(p => Promise.resolve(p));
+        // resolve this promise as soon as one resolves
+        promises.forEach(p => p.then(resolve));
+        // reject if all promises reject
+        promises.reduce((a, b) => a.catch(() => b))
+            .catch(() => reject(Error("All failed")));
+    });
+};
+
+export function to_understand_promiseAny() { 
+    const [a, b, c, d] = [1, 2, 3, 4];
+    a.catch(() => b)
+    .catch(() => c)
+    .catch(() => d)
+    .catch(() => Error('All faliled'))
+}
