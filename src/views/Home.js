@@ -61,6 +61,7 @@ let mapDispatch = (dispatch, ownProps) => ({
         history.push({pathname: '/join'});
     },
     goToSignIn: () => {
+        return;
         let {history} = ownProps;
         history.push({pathname: '/signin'});
     },

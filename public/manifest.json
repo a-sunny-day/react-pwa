@@ -1,6 +1,6 @@
 {
-  "short_name": "WebClient",
-  "name": "WebClient PWA",
+  "short_name": "WebClient Demo",
+  "name": "WebClient PWA Demo",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
