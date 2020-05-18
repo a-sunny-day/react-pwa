@@ -125,7 +125,8 @@ function mapDispatchToProps(dispatch, ownProps) {
             }
         },
         joinMeeting: (meetingId, joinName) => {
-            MeetingAgent.getInstance().joinMeeting({meetingId, joinName});
+            // MeetingAgent.getInstance().joinMeeting({meetingId, joinName});
+            window.location.href = `https://zoom.us/wc/${meetingId}/join?name=${joinName}`;
         }
     }
 }

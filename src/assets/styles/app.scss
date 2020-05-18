@@ -125,10 +125,10 @@
         height: 40px;
         padding: 0 8px;
         border-radius: 8px;
-        border: 1px solid gray;
+        border: 2px solid #eee;
         outline: none;
         &:focus {
-            border: 1px solid #0e71eb;
+            border: 2px solid #0e71eb;
         }
     }
     .join-joinName {
