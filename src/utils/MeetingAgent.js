@@ -13,7 +13,7 @@ export default class MeetingAgent {
         this.openedBrowsingContext = null; // start/join meeting will open another window/tab, we need to communicate to it
         this.hasReceiveStartMsg = false;
         this.windowName = "WebCliet_Meeting";
-        this.windowFeatures = "top=20,left=20,location=no";
+        this.windowFeatures = "top=20,left=20,titlebar=0,toolbar=0,location=0,status=0,menubar=0";
     }
 
     static getInstance() {
@@ -25,7 +25,7 @@ export default class MeetingAgent {
     }
 
     startMeeting(usePMI) {
-        const url = "https://zoomdev.us/wc/2121345852/start";
+        const url = "https://zoom.us/wc/**********/start";
         let features = isInStandaloneMode() ? this.windowFeatures : "";
         if (this.openedBrowsingContext == null || this.openedBrowsingContext.closed) {
             this.openedBrowsingContext = window.open(url, this.windowName, features);
@@ -40,7 +40,7 @@ export default class MeetingAgent {
     }
 
     joinMeeting(meeting) {
-        const url = `https://zoomdev.us/wc/${meeting.meetingId}/join?name=${meeting.joinName}`;
+        const url = `https://zoom.us/wc/${meeting.meetingId}/join?name=${meeting.joinName}`;
         let features = isInStandaloneMode() ? this.windowFeatures : "";
         if (
             this.openedBrowsingContext == null ||

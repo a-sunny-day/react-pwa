@@ -36,9 +36,6 @@ function App(props) {
                     </Route>
                 </Switch>
             </div>
-            {
-                !isInStandaloneMode() && <PWAInstallPopup />
-            }
         </>
     );
 }
