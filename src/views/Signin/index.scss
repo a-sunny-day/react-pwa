@@ -1,0 +1,42 @@
+.signin {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+    .signin-header {
+        text-align: left;;
+    }
+
+    .signin-body {
+        flex-grow: 1;
+        width: 100%;
+        background: #eee;
+    } 
+    .signin-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+
+        .signin-back,
+        .signin-signup {
+            color: gray;
+            font-size: 14px;
+        }
+        .signin-back {
+            text-decoration: none;
+            cursor: pointer;
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}
+
+
+.signin-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

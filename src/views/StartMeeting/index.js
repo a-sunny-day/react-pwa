@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import ZmCheckbox from 'components/Checkbox/Checkbox';
+import "./index.scss";
 
 function StartMeeting(props) {
     let pmi = "***-****-****";

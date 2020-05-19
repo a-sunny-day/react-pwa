@@ -1,5 +1,5 @@
 import React from 'react';
-import 'styles/app.scss';
+import './App.scss';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import AuthRoute from "routes/AuthRoute.js"

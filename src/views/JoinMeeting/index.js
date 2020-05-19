@@ -1,9 +1,10 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import ZmCheckbox from "components/Checkbox/Checkbox";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import MeetingAgent from "utils/MeetingAgent.js";
-import {addHyphenToMeetingId} from 'utils/index';
+import { addHyphenToMeetingId } from 'utils/index';
+import "./index.scss";
 
 class JoinMeetingForm extends React.Component {
     constructor(props) {
@@ -17,9 +18,9 @@ class JoinMeetingForm extends React.Component {
         this.onMeetingIdChange = this.onMeetingIdChange.bind(this);
         this.onJoinNameChange = this.onJoinNameChange.bind(this);
         this.onClickJoinMeeting = this.onClickJoinMeeting.bind(this);
-        this.onInputKeyDown  = this.onInputKeyDown.bind(this);
+        this.onInputKeyDown = this.onInputKeyDown.bind(this);
     }
-    onMeetingIdChange(e) {        
+    onMeetingIdChange(e) {
         let id = e.target.value.toLowerCase();
         id = id.replace(/[-\s]/g, "");
         // if(/^[a-z]/.test(id)) {
@@ -30,7 +31,7 @@ class JoinMeetingForm extends React.Component {
         //     })
         // } else 
         // first filter invalid input character
-        if(/^\d{0,11}$/.test(id)) {
+        if (/^\d{0,11}$/.test(id)) {
             this.setState({
                 meetingId: addHyphenToMeetingId(id),
                 isMeetingIdValid: /^\d{9,11}$/.test(id)
@@ -40,16 +41,16 @@ class JoinMeetingForm extends React.Component {
 
     onJoinNameChange(e) {
         let name = e.target.value;
-        if(name.length <= 70) {
+        if (name.length <= 70) {
             this.setState({
-                joinName:  name,
+                joinName: name,
                 isJoinNameValid: name.length >= 0
             })
         }
     }
 
     onClickJoinMeeting() {
-        if(this.state.isMeetingIdValid && this.state.isJoinNameValid) {
+        if (this.state.isMeetingIdValid && this.state.isJoinNameValid) {
             let meetingId = this.state.meetingId.replace(/-/g, "");
             console.group("join meeting")
             console.log("meeting id is %s", meetingId);
@@ -60,7 +61,7 @@ class JoinMeetingForm extends React.Component {
     }
 
     onInputKeyDown(e) {
-        if(e.key === "Enter") {
+        if (e.key === "Enter") {
             this.onClickJoinMeeting();
         }
     }
@@ -71,40 +72,40 @@ class JoinMeetingForm extends React.Component {
                 <h2 className="join-header">Join Meeting</h2>
                 <div className="join-form">
                     <input
-                        type="text" 
-                        className="join-meetingId" 
+                        type="text"
+                        className="join-meetingId"
                         placeholder="Meeting ID"
                         value={this.state.meetingId}
                         onChange={this.onMeetingIdChange}
                         onKeyDown={this.onInputKeyDown}></input>
                     <input
-                        type="text" 
-                        className="join-joinName" 
+                        type="text"
+                        className="join-joinName"
                         placeholder="Screen Name"
                         value={this.state.joinName}
                         onChange={this.onJoinNameChange}
                         onKeyDown={this.onInputKeyDown}></input>
 
-                    <ZmCheckbox 
-                        containerClass="join-connect-audio" 
+                    <ZmCheckbox
+                        containerClass="join-connect-audio"
                         text="Remember my name for future meetings"
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
-                    <ZmCheckbox 
-                        containerClass="join-connect-audio" 
+                        checked={false}
+                        onChange={checked => { console.log(checked) }} />
+                    <ZmCheckbox
+                        containerClass="join-connect-audio"
                         text="Do not connect to audio"
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
-                    <ZmCheckbox 
+                        checked={false}
+                        onChange={checked => { console.log(checked) }} />
+                    <ZmCheckbox
                         containerClass="join-off-video"
-                        text="Turn off my video" 
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
+                        text="Turn off my video"
+                        checked={false}
+                        onChange={checked => { console.log(checked) }} />
 
                 </div>
                 <footer>
                     <button
-                        disabled={!(this.state.isMeetingIdValid && this.state.isJoinNameValid)} 
+                        disabled={!(this.state.isMeetingIdValid && this.state.isJoinNameValid)}
                         className="btn-join"
                         onClick={this.onClickJoinMeeting}>Join</button>
                     <button className="btn-cancel" onClick={this.props.onCancel}>Cancel</button>
@@ -117,17 +118,17 @@ class JoinMeetingForm extends React.Component {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         onCancel: () => {
-            const {history} = ownProps;
-            if(history.length === 1) {
-                history.push({pathname: "/"})
+            const { history } = ownProps;
+            if (history.length === 1) {
+                history.push({ pathname: "/" })
             } else {
                 history.goBack();
             }
         },
         joinMeeting: (meetingId, joinName) => {
-            MeetingAgent.getInstance().joinMeeting({meetingId, joinName});
+            MeetingAgent.getInstance().joinMeeting({ meetingId, joinName });
         }
     }
 }
 
-export default withRouter( connect( null, mapDispatchToProps)(JoinMeetingForm) );
+export default withRouter(connect(null, mapDispatchToProps)(JoinMeetingForm));

@@ -1,6 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import "./index.scss";
 
 // const privacyURL = 'https://zoom.us/privacy?onlycontent=1';
 // const serviceURL = 'https://zoom.us/terms?onlycontent=1';

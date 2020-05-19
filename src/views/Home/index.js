@@ -9,7 +9,9 @@ import React from 'react'
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
-function MainLogout(props) {
+import "./index.scss";
+
+function Home(props) {
     return (
         <div className="home">
             {
@@ -70,4 +72,4 @@ let mapDispatch = (dispatch, ownProps) => ({
     }
 })
 
-export default withRouter( connect(mapState, mapDispatch)(MainLogout) );
+export default withRouter( connect(mapState, mapDispatch)(Home) );

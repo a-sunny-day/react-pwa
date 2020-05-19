@@ -1,0 +1,69 @@
+.join {
+    width: 100%;
+    height: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    .join-header {
+        text-align: left;
+    }
+
+    .join-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .join-meetingId, 
+    .join-joinName {
+        width: 100%;
+        height: 40px;
+        padding: 0 8px;
+        border-radius: 8px;
+        border: 1px solid gray;
+        outline: none;
+        &:focus {
+            border: 1px solid #0e71eb;
+        }
+    }
+    .join-joinName {
+        margin-top: 30px;
+    }
+
+    .join-connect-audio,
+    .join-off-video {
+        align-self: flex-start;
+        margin-top: 10px;
+    }
+
+    footer {
+        width: 100%;
+        margin-top: 20px;
+        text-align: right;
+        button {
+            width: 90px;
+            height: 30px;
+            border: none;
+            border-radius: 6px;
+            &.btn-join {
+                background: #efeff4;
+                color: gray;
+                &:enabled {
+                    font-weight: 600;
+                    background: #0e72ed;
+                    color: #fff;
+                }
+            }
+            
+            &.btn-cancel {
+                margin-left: 20px;
+                background: #fff;
+                border: 1px solid gray;
+                &:hover {
+                    background: #efeff4;
+                }
+            }
+
+        }
+
+    }
+}
