@@ -9,7 +9,6 @@ const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
-console.log("++++++++++++++++++++++++++++++++++++++++++++")
 /**
 * Every program that runs on your computer has a current working directory, 
 * or cwd. Any filenames or paths that do not begin with the root folder are assumed to be under the current working directory
@@ -21,8 +20,6 @@ console.log(`\t ${process.cwd()}`);
 
 // __dirname is for any files
 // the directory name of the directory containing the current file
-console.log(`\t ${__dirname}`);
-console.log("++++++++++++++++++++++++++++++++++++++++++++")
 // process.exit(-1)
 
 
@@ -74,6 +71,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appCustomServicerWorkerJS: resolveModule(resolveApp, 'src/sw'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),

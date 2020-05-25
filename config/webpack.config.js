@@ -614,20 +614,27 @@ module.exports = function(webpackEnv) {
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
       isEnvProduction &&
-        new WorkboxWebpackPlugin.GenerateSW({
-          clientsClaim: true,
-          exclude: [/\.map$/, /asset-manifest\.json$/],
-          importWorkboxFrom: 'local',
-          navigateFallback: paths.publicUrlOrPath + 'index.html',
-          navigateFallbackBlacklist: [
-            // Exclude URLs starting with /_, as they're likely an API call
-            new RegExp('^/_'),
-            // Exclude any URLs whose last part seems to be a file extension
-            // as they're likely a resource and not a SPA route.
-            // URLs containing a "?" character won't be blacklisted as they're likely
-            // a route with query params (e.g. auth callbacks).
-            new RegExp('/[^/?]+\\.[^/]+$'),
-          ],
+        // new WorkboxWebpackPlugin.GenerateSW({
+        //   clientsClaim: true,
+        //   exclude: [/\.map$/, /asset-manifest\.json$/],
+        //   importWorkboxFrom: 'local',
+        //   navigateFallback: paths.publicUrlOrPath + 'index.html',
+        //   navigateFallbackBlacklist: [
+        //     // Exclude URLs starting with /_, as they're likely an API call
+        //     new RegExp('^/_'),
+        //     // Exclude any URLs whose last part seems to be a file extension
+        //     // as they're likely a resource and not a SPA route.
+        //     // URLs containing a "?" character won't be blacklisted as they're likely
+        //     // a route with query params (e.g. auth callbacks).
+        //     new RegExp('/[^/?]+\\.[^/]+$'),
+        //   ],
+        //   importScripts: ['/zm-service-worker.js']
+        // }),
+        new WorkboxWebpackPlugin.InjectManifest({
+            swSrc: paths.appCustomServicerWorkerJS,
+            swDest: 'sw.js',
+            importWorkboxFrom: "local",
+            exclude: [/\.map$/, /asset-manifest\.json$/],
         }),
       // TypeScript type checking
       useTypeScript &&
