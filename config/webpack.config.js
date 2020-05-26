@@ -632,7 +632,6 @@ module.exports = function(webpackEnv) {
         // }),
         new WorkboxWebpackPlugin.InjectManifest({
             swSrc: paths.appCustomServicerWorkerJS,
-            swDest: 'sw.js',
             importWorkboxFrom: "local",
             exclude: [/\.map$/, /asset-manifest\.json$/],
          }),

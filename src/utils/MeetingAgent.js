@@ -39,7 +39,7 @@ export default class MeetingAgent {
         }
     }
 
-    joinMeeting(meeting) {
+    _joinMeeting(meeting) {
         const url = `https://zoom.us/wc/${meeting.meetingId}/join?name=${meeting.joinName}`;
         let features = isInStandaloneMode() ? this.windowFeatures : "";
         if (
@@ -58,6 +58,14 @@ export default class MeetingAgent {
         }
     }
 
+    joinMeeting(meeting) {
+        const url = `https://zoom.us/wc/${meeting.meetingId}/join?name=${meeting.joinName}`;
+        if( isInStandaloneMode() ) {
+            window.location.href = url;
+        } else {
+            window.open(url, "_blank");
+        }
+    }
     meetingEnded() {
         reduxStoreInstance.dispatch(setIsDuringMeeting(false));
         this.openedBrowsingContext = null;
