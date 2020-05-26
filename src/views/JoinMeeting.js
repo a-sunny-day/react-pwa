@@ -1,134 +1,119 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
-import ZmCheckbox from "components/Checkbox/Checkbox";
-import {connect} from 'react-redux';
-import MeetingAgent from "utils/MeetingAgent.js";
-import {addHyphenToMeetingId} from 'utils/index';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-class JoinMeetingForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            meetingId: "",
-            isMeetingIdValid: false,
-            joinName: "",
-            isJoinNameValid: false
-        }
-        this.onMeetingIdChange = this.onMeetingIdChange.bind(this);
-        this.onJoinNameChange = this.onJoinNameChange.bind(this);
-        this.onClickJoinMeeting = this.onClickJoinMeeting.bind(this);
-        this.onInputKeyDown  = this.onInputKeyDown.bind(this);
-    }
-    onMeetingIdChange(e) {        
+import MeetingAgent from "utils/MeetingAgent.js";
+import ZmCheckbox from "components/Checkbox/Checkbox";
+import { addHyphenToMeetingId } from 'utils/index';
+
+function JoinMeeting({ onCancel, joinMeeting }) {
+    const [meetingId, setMeetingId] = useState("");
+    const [joinName, setJoinName] = useState("");
+
+    let isMeetingIdValid = /^\d{9,11}$/.test(meetingId);
+    let isJoinNameValid = joinName.trim().length > 0 && joinName.trim().length <= 70;
+
+    const onMeetingIdChange = (e) => {
         let id = e.target.value.toLowerCase();
         id = id.replace(/[-\s]/g, "");
-        // if(/^[a-z]/.test(id)) {
-        //     // person link name
-        //     id = id.slice(0, 30); // person link name
-        //     this.setState({
-        //         meetingId: id
-        //     })
-        // } else 
         // first filter invalid input character
-        if(/^\d{0,11}$/.test(id)) {
-            this.setState({
-                meetingId: addHyphenToMeetingId(id),
-                isMeetingIdValid: /^\d{9,11}$/.test(id)
-            })
+        if (/^\d{0,11}$/.test(id)) {
+            setMeetingId(id);
         }
     }
 
-    onJoinNameChange(e) {
+    const onJoinNameChange = (e) => {
         let name = e.target.value;
-        if(name.length <= 70) {
-            this.setState({
-                joinName:  name,
-                isJoinNameValid: name.length >= 0
-            })
+        if (name.length <= 70) {
+            setJoinName(name);
         }
     }
 
-    onClickJoinMeeting() {
-        if(this.state.isMeetingIdValid && this.state.isJoinNameValid) {
-            let meetingId = this.state.meetingId.replace(/-/g, "");
+    const onClickJoinMeeting = () => {
+        if (isMeetingIdValid && isJoinNameValid) {
+            let id = meetingId.replace(/-/g, "");
             console.group("join meeting")
             console.log("meeting id is %s", meetingId);
-            console.log("join name is %s", this.state.joinName);
+            console.log("join name is %s", joinName);
             console.groupEnd();
-            this.props.joinMeeting(meetingId, this.state.joinName);
+            joinMeeting(id, joinName);
         }
     }
 
-    onInputKeyDown(e) {
-        if(e.key === "Enter") {
-            this.onClickJoinMeeting();
+    const onInputKeyDown = (e) => {
+        if (e.key === "Enter") {
+            onClickJoinMeeting();
         }
     }
 
-    render() {
-        return (
-            <div className="join">
-                <h2 className="join-header">Join Meeting</h2>
-                <div className="join-form">
-                    <input
-                        type="text" 
-                        className="join-meetingId" 
-                        placeholder="Meeting ID"
-                        value={this.state.meetingId}
-                        onChange={this.onMeetingIdChange}
-                        onKeyDown={this.onInputKeyDown}></input>
-                    <input
-                        type="text" 
-                        className="join-joinName" 
-                        placeholder="Screen Name"
-                        value={this.state.joinName}
-                        onChange={this.onJoinNameChange}
-                        onKeyDown={this.onInputKeyDown}></input>
+    return (
+        <div className="join">
+            <h2 className="join-header">Join Meeting</h2>
+            <div className="join-form">
+                <input
+                    type="text"
+                    className="join-meetingId"
+                    placeholder="Meeting ID"
+                    value={addHyphenToMeetingId(meetingId)}
+                    onChange={onMeetingIdChange}
+                    onKeyDown={onInputKeyDown}></input>
+                <input
+                    type="text"
+                    className="join-joinName"
+                    placeholder="Screen Name"
+                    value={joinName}
+                    onChange={onJoinNameChange}
+                    onKeyDown={onInputKeyDown}></input>
 
-                    <ZmCheckbox 
-                        containerClass="join-connect-audio" 
-                        text="Remember my name for future meetings"
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
-                    <ZmCheckbox 
-                        containerClass="join-connect-audio" 
-                        text="Do not connect to audio"
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
-                    <ZmCheckbox 
-                        containerClass="join-off-video"
-                        text="Turn off my video" 
-                        checked={false} 
-                        onChange={checked => {console.log(checked)}}/>
+                <ZmCheckbox
+                    containerClass="join-connect-audio"
+                    text="Remember my name for future meetings"
+                    checked={false}
+                    onChange={checked => { console.log(checked) }} />
+                <ZmCheckbox
+                    containerClass="join-connect-audio"
+                    text="Do not connect to audio"
+                    checked={false}
+                    onChange={checked => { console.log(checked) }} />
+                <ZmCheckbox
+                    containerClass="join-off-video"
+                    text="Turn off my video"
+                    checked={false}
+                    onChange={checked => { console.log(checked) }} />
 
-                </div>
-                <footer>
-                    <button
-                        disabled={!(this.state.isMeetingIdValid && this.state.isJoinNameValid)} 
-                        className="btn-join"
-                        onClick={this.onClickJoinMeeting}>Join</button>
-                    <button className="btn-cancel" onClick={this.props.onCancel}>Cancel</button>
-                </footer>
             </div>
-        )
-    }
+            <footer>
+                <button
+                    disabled={!(isMeetingIdValid && isJoinNameValid)}
+                    className="btn-join"
+                    onClick={onClickJoinMeeting}>Join</button>
+                <button className="btn-cancel" onClick={onCancel}>Cancel</button>
+            </footer>
+        </div>
+    )
 }
+
+JoinMeeting.propTypes = {
+    onCancel: PropTypes.func.isRequired,
+    joinMeeting: PropTypes.func.isRequired
+};
+
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         onCancel: () => {
-            const {history} = ownProps;
-            if(history.length === 1) {
-                history.push({pathname: "/"})
+            const { history } = ownProps;
+            if (history.length === 1) {
+                history.push({ pathname: "/" })
             } else {
                 history.goBack();
             }
         },
         joinMeeting: (meetingId, joinName) => {
-            // MeetingAgent.getInstance().joinMeeting({meetingId, joinName});
-            window.location.href = `https://zoom.us/wc/${meetingId}/join?name=${joinName}`;
+            MeetingAgent.getInstance().joinMeeting({ meetingId, joinName });
         }
     }
 }
 
-export default withRouter( connect( null, mapDispatchToProps)(JoinMeetingForm) );
+export default withRouter(connect(null, mapDispatchToProps)(JoinMeeting));
