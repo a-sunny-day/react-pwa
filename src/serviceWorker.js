@@ -1,15 +1,4 @@
-// This optional code is used to register a service worker.
-// register() is not called by default.
-
-// This lets the app load faster on subsequent visits in production, and gives
-// it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on subsequent visits to a page, after all the
-// existing tabs open on the page have been closed, since previously cached
-// resources are updated in the background.
-
-// To learn more about the benefits of this model and instructions on how to
-// opt-in, read https://bit.ly/CRA-PWA
-
+// read https://bit.ly/CRA-PWA
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -25,11 +14,16 @@ export function register(config) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+      // see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
+
+    window.navigator.serviceWorker.addEventListener('message', e => {
+        if(e.data && e.data.type === 'SW.UPDATE') {
+            console.log('service worker has updated and user confirmed to reload the page; to reload.');
+            window.location.reload();
+        }
+    });
 
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/sw.js`;
@@ -42,8 +36,7 @@ export function register(config) {
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
           console.log(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
+            'This web app is being served cache-first by a service ' + 'worker.'
           );
         });
       } else {
@@ -59,6 +52,7 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
+        // If updatefound is fired, it means that there's a new service worker being installed.
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
@@ -69,11 +63,7 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
-              );
-
+              
               // Execute callback
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
@@ -92,9 +82,6 @@ function registerValidSW(swUrl, config) {
           }
         };
       };
-      registration.addEventListener('push', event => {
-          console.log("push event");
-      })
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);

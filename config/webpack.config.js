@@ -635,7 +635,7 @@ module.exports = function(webpackEnv) {
             swDest: 'sw.js',
             importWorkboxFrom: "local",
             exclude: [/\.map$/, /asset-manifest\.json$/],
-        }),
+         }),
       // TypeScript type checking
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
